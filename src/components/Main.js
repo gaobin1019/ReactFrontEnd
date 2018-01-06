@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Register } from "./register"
+import { Login } from "./login"
 
 export class Main extends Component {
     render() {
         return (
             <section className="main">
-                <Register />
+                <Login />
             </section>
         );
     }
