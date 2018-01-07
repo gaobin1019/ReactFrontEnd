@@ -3,10 +3,16 @@ import React from "react";
 import { Form, Icon, Input, Button, message } from 'antd';
 import { Link } from "react-router-dom";
 import { API_ROOT } from "../constants"
+import { PropTypes } from "prop-types";
+
 
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
+    static propTypes = {
+        handleLoginSuccess: PropTypes.func.isRequired
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -21,6 +27,7 @@ class NormalLoginForm extends React.Component {
                     })
                 }).then((response) => {
                     message.success(response);
+                    this.props.handleLoginSuccess(response);
                 }, (err) => {
                     message.error(err.responseText);
                 }).catch((err) => {
