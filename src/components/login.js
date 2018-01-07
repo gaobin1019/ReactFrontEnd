@@ -3,7 +3,7 @@ import React from "react";
 import { Form, Icon, Input, Button, message } from 'antd';
 import { Link } from "react-router-dom";
 import { API_ROOT } from "../constants"
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 
 
 const FormItem = Form.Item;

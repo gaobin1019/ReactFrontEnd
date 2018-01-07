@@ -3,7 +3,7 @@ import { Register } from "./register";
 import { Login } from "./login";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Home } from "./Home";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 
 export class Main extends Component {
     static propTypes = {
