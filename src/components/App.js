@@ -4,14 +4,18 @@ import { Header } from './Header';
 import { Main } from './Main';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <Header />
-          <Main />
-      </div>
-    );
-  }
+    state = {
+        isLoggedIn: false
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <Header isLoggedIn={this.state.isLoggedIn}/>
+                <Main isLoggedIn={this.state.isLoggedIn}/>
+            </div>
+        );
+    }
 }
 
 export default App;
