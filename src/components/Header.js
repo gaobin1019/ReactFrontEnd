@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../assets/images/dollars_logo.jpg';
+import logo from '../assets/images/logo.svg';
 import PropTypes from "prop-types";
 import { Icon } from "antd";
 
@@ -13,6 +13,7 @@ export class Header extends Component {
         return (
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
+                <h1 className="App-title">Welcome to Around</h1>
                 {this.props.isLoggedIn ?
                     <a className="logout"
                        onClick={this.props.handleLogout}

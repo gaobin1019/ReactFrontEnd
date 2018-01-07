@@ -2,12 +2,12 @@ import React from 'react';
 import { Tabs, Button } from 'antd';
 const TabPane = Tabs.TabPane;
 
-const operations = <Button>Extra Action</Button>;
+const operations = <Button>New post</Button>;
 
 export class Home extends React.Component {
     render() {
         return (
-            <Tabs tabBarExtraContent={operations}>
+            <Tabs className="main-tabs" tabBarExtraContent={operations}>
                 <TabPane tab="Post" key="1">
                     Content of tab 1
                 </TabPane>
