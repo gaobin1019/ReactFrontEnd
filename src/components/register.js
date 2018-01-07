@@ -27,6 +27,7 @@ class RegistrationForm extends React.Component {
                     message.success(response);
                     this.props.history.push('/login');
                 }, (err) => {
+                    console.log('falied to login');
                     message.error(err.responseText);
                 }).catch(function(err) {
                     message.error(err);
