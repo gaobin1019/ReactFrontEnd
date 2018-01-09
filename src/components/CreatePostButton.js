@@ -55,9 +55,11 @@ export class CreatePostButton extends React.Component {
             });
         });
     }
+
     saveFormRef = (form) => {
         this.form = form;
     }
+
     render() {
         return (
             <div>
