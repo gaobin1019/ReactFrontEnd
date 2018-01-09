@@ -9,6 +9,7 @@ const operations = <Button>New post</Button>;
 export class Home extends React.Component {
     state = {
         posts: [],
+        isLoadingPosts: false,
         isLoadingGeoLocation: false,
         loadingErrorMessage: '',
     };
@@ -36,6 +37,7 @@ export class Home extends React.Component {
     }
 
     getPosts = () => {
+        this.setState({isLoadingPosts: true});
         const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
         $.ajax({
             method: 'GET',
@@ -46,16 +48,25 @@ export class Home extends React.Component {
         }).then(
             (response) => {
                 console.log(response);
-                this.setState({posts: response});
+                this.setState({
+                    posts: response,
+                    isLoadingPosts: false,
+                });
             },
             (err) => {
                 console.log(err.responseText);
-                this.setState({loadingErrorMessage: err.responseText});
+                this.setState({
+                    loadingErrorMessage: err.responseText,
+                    isLoadingPosts: false,
+                });
             }
         ).catch(
             (err) => {
                 console.log(err);
-                this.setState({loadingErrorMessage: err});
+                this.setState({
+                    loadingErrorMessage: err,
+                    isLoadingPosts: false,
+                });
             }
         );
     }
@@ -83,10 +94,16 @@ export class Home extends React.Component {
 
     getGallery = () => {
         if (this.state.loadingErrorMessage) {
-            return <div>{this.state.loadingErrorMessage}</div>;
+            return (
+                <div>{this.state.loadingErrorMessage}</div>
+            );
         } else if (this.state.isLoadingGeoLocation) {
             return (
                 <Spin tip="Loading geolocation"></Spin>
+            );
+        } else if (this.state.isLoadingPosts) {
+            return (
+                <Spin tip="Loading posts near your location"></Spin>
             );
         }
 
