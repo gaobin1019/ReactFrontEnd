@@ -1,13 +1,9 @@
 import $ from 'jquery';
 import React from 'react';
-import { Tabs, Button, Spin } from 'antd';
+import { Tabs, Spin } from 'antd';
 import { Gallery } from "./Gallery";
+import { CreatePostButton } from "./CreatePostButton"
 import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY } from "../constants";
-
-
-
-const TabPane = Tabs.TabPane;
-const operations = <Button>New post</Button>;
 
 export class Home extends React.Component {
     state = {
@@ -42,7 +38,7 @@ export class Home extends React.Component {
     getPosts = () => {
         this.setState({isLoadingPosts: true});
         const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
-        $.ajax({
+        return $.ajax({
             method: 'GET',
             url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=200`,
             headers: {
@@ -130,8 +126,11 @@ export class Home extends React.Component {
         return null;
     }
     render() {
+        const createPostButton = <CreatePostButton loadNearbyPosts={this.getPosts}>New post</CreatePostButton>;
+        const TabPane = Tabs.TabPane;
+
         return (
-            <Tabs className="main-tabs" tabBarExtraContent={operations}>
+            <Tabs className="main-tabs" tabBarExtraContent={createPostButton}>
                 <TabPane tab="Post" key="1">
                     {this.getGallery()}
                 </TabPane>
