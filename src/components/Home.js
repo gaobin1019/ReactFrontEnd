@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import React from 'react';
 import { Tabs, Button, Spin } from 'antd';
-import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY } from "../constants"
+import { Gallery } from "./Gallery";
+import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY } from "../constants";
+
+
 
 const TabPane = Tabs.TabPane;
 const operations = <Button>New post</Button>;
@@ -105,6 +108,22 @@ export class Home extends React.Component {
         } else if (this.state.isLoadingPosts) {
             return (
                 <Spin tip="Loading posts" className={""} indicator={""}/>
+            );
+        } else if (this.state.posts.length > 0) {
+            const images = this.state.posts.map((post) => (
+                 {
+                    user: post.user,
+                    src: post.url,
+                    thumbnail: post.url,
+                    thumbnailWidth: 400,
+                    thumbnailHeight: 300,
+                    caption: post.message,
+                }
+            ));
+
+            //console.log(images);
+            return (
+                <Gallery images={images}/>
             );
         }
 
