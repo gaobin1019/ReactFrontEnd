@@ -1,12 +1,14 @@
+import $ from 'jquery';
 import React from 'react';
 import { Tabs, Button, Spin } from 'antd';
-import { GEO_OPTIONS, POS_KEY } from "../constants"
+import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY } from "../constants"
 
 const TabPane = Tabs.TabPane;
 const operations = <Button>New post</Button>;
 
 export class Home extends React.Component {
     state = {
+        posts: [],
         isLoadingGeoLocation: false,
         loadingErrorMessage: '',
     };
@@ -33,6 +35,31 @@ export class Home extends React.Component {
         }
     }
 
+    getPosts = () => {
+        const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
+        $.ajax({
+            method: 'GET',
+            url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=200`,
+            headers: {
+              'Authorization': `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`,
+            },
+        }).then(
+            (response) => {
+                console.log(response);
+                this.setState({posts: response});
+            },
+            (err) => {
+                console.log(err.responseText);
+                this.setState({loadingErrorMessage: err.responseText});
+            }
+        ).catch(
+            (err) => {
+                console.log(err);
+                this.setState({loadingErrorMessage: err});
+            }
+        );
+    }
+
     onSuccessLoadGeoLocation = (position) => {
         console.log(position);
         this.setState({
@@ -43,6 +70,7 @@ export class Home extends React.Component {
         //destructor ES6
         const {latitude: lat, longitude: lon} = position.coords;
         localStorage.setItem(POS_KEY, JSON.stringify({lat: lat, lon: lon}, null, 4));
+        this.getPosts();
     }
 
     onFailedLoadGeoLocation = (err) => {
