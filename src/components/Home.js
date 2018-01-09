@@ -11,7 +11,7 @@ export class Home extends React.Component {
         posts: [],
         isLoadingPosts: false,
         isLoadingGeoLocation: false,
-        loadingErrorMessage: '',
+        error: '',
     };
 
     //life cycle method should not be class property
@@ -20,7 +20,7 @@ export class Home extends React.Component {
         if ("geolocation" in navigator) {
             this.setState({
                 isLoadingGeoLocation: true,
-                loadingErrorMessage: '',
+                error: '',
             });
             navigator.geolocation.getCurrentPosition(
                 this.onSuccessLoadGeoLocation,
@@ -31,7 +31,7 @@ export class Home extends React.Component {
             //geolocation is not available
             this.setState({
                     isLoadingGeoLocation: false,
-                    loadingErrorMessage: 'geolocation not supported',
+                    error: 'geolocation not supported',
             });
         }
     }
@@ -51,12 +51,13 @@ export class Home extends React.Component {
                 this.setState({
                     posts: response,
                     isLoadingPosts: false,
+                    error: '',
                 });
             },
             (err) => {
                 console.log(err.responseText);
                 this.setState({
-                    loadingErrorMessage: err.responseText,
+                    error: err.responseText,
                     isLoadingPosts: false,
                 });
             }
@@ -64,7 +65,7 @@ export class Home extends React.Component {
             (err) => {
                 console.log(err);
                 this.setState({
-                    loadingErrorMessage: err,
+                    error: err,
                     isLoadingPosts: false,
                 });
             }
@@ -75,7 +76,7 @@ export class Home extends React.Component {
         console.log(position);
         this.setState({
             isLoadingGeoLocation: false,
-            loadingErrorMessage: '',
+            error: '',
         });
 
         //destructor ES6
@@ -88,14 +89,14 @@ export class Home extends React.Component {
         console.log(err);
         this.setState({
             isLoadingGeoLocation: false,
-            loadingErrorMessage: 'failed to load geolocation',
+            error: 'failed to load geolocation',
         });
     }
 
     getGallery = () => {
-        if (this.state.loadingErrorMessage) {
+        if (this.state.error) {
             return (
-                <div>{this.state.loadingErrorMessage}</div>
+                <div>{this.state.error}</div>
             );
         } else if (this.state.isLoadingGeoLocation) {
             return (
