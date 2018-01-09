@@ -99,11 +99,11 @@ export class Home extends React.Component {
             );
         } else if (this.state.isLoadingGeoLocation) {
             return (
-                <Spin tip="Loading geolocation"></Spin>
+                <Spin tip="Loading geolocation" className={""} indicator={""}/>
             );
         } else if (this.state.isLoadingPosts) {
             return (
-                <Spin tip="Loading posts near your location"></Spin>
+                <Spin tip="Loading posts" className={""} indicator={""}/>
             );
         }
 
