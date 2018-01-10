@@ -6,6 +6,7 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
+import {POS_KEY} from "../constants";
 
 class AroundMap extends React.Component {
     state = {
@@ -17,13 +18,14 @@ class AroundMap extends React.Component {
     };
 
     render() {
+        const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
         return (
             <GoogleMap
-                defaultZoom={8}
-                defaultCenter={{ lat: -34.397, lng: 150.644 }}
+                defaultZoom={11}
+                defaultCenter={{ lat: lat, lng: lon }}
             >
                 <Marker
-                    position={{ lat: -34.397, lng: 150.644 }}
+                    position={{ lat: lat, lng: lon }}
                     onClick={this.onToggleOpen}
                 >
                     {this.state.isOpen ?
