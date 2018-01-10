@@ -131,7 +131,7 @@ export class Home extends React.Component {
 
         return (
             <Tabs className="main-tabs" tabBarExtraContent={createPostButton}>
-                <TabPane tab="Post" key="1">
+                <TabPane tab="Posts around" key="1">
                     {this.getGallery()}
                 </TabPane>
                 <TabPane tab="Map" key="2">
