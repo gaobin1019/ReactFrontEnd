@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import React from "react";
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Modal, Button, message } from 'antd';
 import { WrappedCreatePostForm } from "./CreatePostForm"
 import {API_ROOT, AUTH_PREFIX, POS_KEY, TOKEN_KEY} from "../constants"
@@ -27,7 +27,7 @@ export class CreatePostButton extends React.Component {
         const form = this.form.getWrappedForm();
         form.validateFields((err, values) => {
             if (!err) {
-                console.log('get values: ' + JSON.stringify(values, null, 4));
+                console.log('form values: ' + JSON.stringify(values));
 
                 const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
                 const formData = new FormData();
