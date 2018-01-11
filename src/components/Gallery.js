@@ -15,7 +15,7 @@ export class Gallery extends Component {
                 thumbnailHeight: PropTypes.number.isRequired
             })
         ).isRequired
-    }
+    };
 
     render() {
         const images = this.props.images.map((image) => {

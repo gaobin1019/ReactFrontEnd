@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
     static propTypes = {
         handleLoginSuccess: PropTypes.func.isRequired
-    }
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -35,7 +35,8 @@ class NormalLoginForm extends React.Component {
                 });
             }
         });
-    }
+    };
+
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

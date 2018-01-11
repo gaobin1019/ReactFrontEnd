@@ -9,19 +9,19 @@ export class Main extends Component {
     static propTypes = {
         isLoggedIn: PropTypes.bool.isRequired,
         handleLoginSuccess: PropTypes.func.isRequired
-    }
+    };
 
     getLogin = () => {
         return this.props.isLoggedIn ? <Redirect to="/home" /> : <Login handleLoginSuccess={this.props.handleLoginSuccess} />;
-    }
+    };
 
     getHome = () => {
         return this.props.isLoggedIn ? <Home /> : <Redirect to="/login" />; //redirect render '/url' and changed url
-    }
+    };
 
     getRoot = () => {
         return <Redirect to="/login" />;
-    }
+    };
 
     render() {
         return (
