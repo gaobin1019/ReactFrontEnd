@@ -9,21 +9,20 @@ import {API_ROOT, AUTH_PREFIX, POS_KEY, TOKEN_KEY} from "../constants"
 export class CreatePostButton extends React.Component {
     static propTypes = {
         loadNearbyPosts: PropTypes.func.isRequired,
-    }
+    };
 
     state = {
         visible: false,
         confirmLoading: false,
-    }
+    };
 
     showModal = () => {
         this.setState({
             visible: true,
         });
-    }
+    };
 
     handleOk = () => {
-        //get value
         const form = this.form.getWrappedForm();
         form.validateFields((err, values) => {
             if (!err) {
@@ -62,20 +61,18 @@ export class CreatePostButton extends React.Component {
                     console.error(e);
                 });
             }
-
-
         });
-    }
+    };
     handleCancel = () => {
         console.log('Clicked cancel button');
         this.setState({
             visible: false,
         });
-    }
+    };
 
     saveFormRef = (form) => {
         this.form = form;
-    }
+    };
 
     render() {
         const { visible, confirmLoading } = this.state;

@@ -70,7 +70,7 @@ export class Home extends React.Component {
                 });
             }
         );
-    }
+    };
 
     onSuccessLoadGeoLocation = (position) => {
         console.log(position);
@@ -83,7 +83,7 @@ export class Home extends React.Component {
         const {latitude: lat, longitude: lon} = position.coords;
         localStorage.setItem(POS_KEY, JSON.stringify({lat: lat, lon: lon}, null, 4));
         this.getPosts();
-    }
+    };
 
     onFailedLoadGeoLocation = (err) => {
         console.log(err);
@@ -91,7 +91,7 @@ export class Home extends React.Component {
             isLoadingGeoLocation: false,
             error: 'failed to load geolocation',
         });
-    }
+    };
 
     getGallery = () => {
         if (this.state.error) {
@@ -125,7 +125,8 @@ export class Home extends React.Component {
         }
 
         return null;
-    }
+    };
+
     render() {
         const createPostButton = <CreatePostButton loadNearbyPosts={this.getPosts} />;
         const TabPane = Tabs.TabPane;
@@ -137,6 +138,7 @@ export class Home extends React.Component {
                 </TabPane>
                 <TabPane tab="Map" key="2">
                     <WrappedAroundMap
+                        posts={this.state.posts}
                         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `400px` }} />}
