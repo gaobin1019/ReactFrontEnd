@@ -12,7 +12,7 @@ class AroundMap extends React.Component {
         this.map = map;
     };
 
-    onDragEnd = () => {
+    reload = () => {
         const center = this.map.getCenter();
         const position = {lat: center.lat(), lon: center.lng()};
         this.props.getPosts(position, this.getRange());
@@ -35,7 +35,8 @@ class AroundMap extends React.Component {
         return (
             <GoogleMap
                 ref={this.getMapRef}
-                onDragEnd={this.onDragEnd}
+                onDragEnd={this.reload}
+                onZoomChanged={this.reload}
                 defaultZoom={11}
                 defaultCenter={{ lat: lat, lng: lon }}
             >
