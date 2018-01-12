@@ -36,9 +36,9 @@ export class Home extends React.Component {
         }
     }
 
-    getPosts = () => {
+    getPosts = (position) => {
         this.setState({isLoadingPosts: true});
-        const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
+        const {lat, lon} = position ? position : JSON.parse(localStorage.getItem(POS_KEY));
         return $.ajax({
             method: 'GET',
             url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
