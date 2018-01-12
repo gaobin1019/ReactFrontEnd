@@ -4,7 +4,7 @@ import { Tabs, Spin } from 'antd';
 import { Gallery } from "./Gallery";
 import { CreatePostButton } from "./CreatePostButton";
 import { WrappedAroundMap } from "./AroundMap";
-import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY } from "../constants";
+import { AUTH_PREFIX, API_ROOT, GEO_OPTIONS, POS_KEY, TOKEN_KEY, DEFAULT_SEARCH_RANGE } from "../constants";
 
 export class Home extends React.Component {
     state = {
@@ -36,12 +36,13 @@ export class Home extends React.Component {
         }
     }
 
-    getPosts = (position) => {
+    getPosts = (position, range) => {
+        const ran = range ? range : DEFAULT_SEARCH_RANGE;
         this.setState({isLoadingPosts: true});
         const {lat, lon} = position ? position : JSON.parse(localStorage.getItem(POS_KEY));
         return $.ajax({
             method: 'GET',
-            url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
+            url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=${ran}`,
             headers: {
               'Authorization': `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`,
             },
