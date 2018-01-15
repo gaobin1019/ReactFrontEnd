@@ -141,7 +141,7 @@ export class Home extends React.Component {
                     <WrappedAroundMap
                         posts={this.state.posts}
                         getPosts={this.getPosts}
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBja19O3SA1lBzZQUr6hfNGlJrui0zsQKA&v=3.exp&libraries=geometry,drawing,places"
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `400px` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
