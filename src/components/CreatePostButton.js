@@ -30,10 +30,17 @@ export class CreatePostButton extends React.Component {
 
                 const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
                 const formData = new FormData();
-                formData.set('lat', lat);
-                formData.set('lon', lon);
-                formData.set('message', values.message);
-                formData.set('image', values.image[0]);
+                if (formData.set) {
+                    formData.set('lat', lat);
+                    formData.set('lon', lon);
+                    formData.set('message', values.message);
+                    formData.set('image', values.image[0]);
+                } else if (formData.append) {
+                    formData.append('lat', lat);
+                    formData.append('lon', lon);
+                    formData.append('message', values.message);
+                    formData.append('image', values.image[0]);
+                }
 
                 this.setState({ confirmLoading: true });
                 $.ajax({
